@@ -12,3 +12,7 @@
 */
 
 Route::get('/', 'ArticleController@index');
+Route::get('create', 'ArticleController@create');
+Route::post('create', 'ArticleController@store');
+Route::get('edit/{id}', 'ArticleController@edit');
+Route::post('edit', 'ArticleController@update');
