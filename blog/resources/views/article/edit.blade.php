@@ -7,19 +7,21 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   </head>
   <body class="p-3">
-    <h1>ブログ一覧</h1>
-    <p><a href="/create" class="btn btn-primary">新規追加</a></p>
+    <h1>ブログ修正</h1>
 
-    @foreach ($articles as $article)
-    <div class="card mb-2">
-      <div class="card-body">
-        <h4 class="card-title">{{ $article->title }}</h4>
-        <h6 class="card-subtitle mb-2 text-muted">{{ $article->updated_at }}</h6>
-        <p class="card-text">{{ $article->body }}</p>
-        <a href="/edit/{{ $article->id }}" class="card-link">修正</a>
+    <form method="post" action="/edit">
+      {{ csrf_field() }}
+      <input type="hidden" class="form-control" name="id" value="{{ $article->id }}">
+      <div class="form-group">
+        <label for="titleInput">タイトル</label>
+        <input type="text" class="form-control" id="titleInput" name="title" value="{{ $article->title }}">
       </div>
-    </div>
-    @endforeach
+      <div class="form-group">
+        <label for="bodyInput">内容</label>
+        <textarea class="form-control" id="bodyInput" rows="3" name="body">{{ $article->body }}</textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">修正</button>
+    </form>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
